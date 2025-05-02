@@ -13,9 +13,6 @@ local UICorner_3
 local GetKey
 local UICorner_4
 
--- this is like the worst script ever bro
--- like allat needs to be deleted 🙏
-
 local function FartHubLoad()
 	-- roblox services that i dont need and totaly never use
 	local Players = game:GetService("Players")
