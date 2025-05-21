@@ -234,8 +234,7 @@ Tab3:CreateButton({
 	Callback = function()
 		local character = game.Players.LocalPlayer.Character
 		if character then
-			character:SetAttribute("DashRegenTime", 0)
-			character:SetAttribute("DashRegenFury", 0)
+			character:SetAttribute("DashRegenTime", 0.05)
 		else
 			print("Character not found.")
 		end
