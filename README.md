@@ -1,1 +1,1 @@
-#Welcome to my script zone :D
+Welcome to my script zone :D
