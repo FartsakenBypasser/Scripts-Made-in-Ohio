@@ -1,36 +1,39 @@
-   local Rayfield = loadstring(game:HttpGet('https://sirius.menu/rayfield'))()
-   local Window = Rayfield:CreateWindow({
-      Name = "Sigma Initation Script",
-      Icon = 0,
-   LoadingTitle = "Combat Initiation"
-   LoadingSubtitle = "by ivanfarter"
-   Theme = "Default"
+local Rayfield = loadstring(game:HttpGet('https://sirius.menu/rayfield'))()
+local Window = Rayfield:CreateWindow({
+   Name = "Combat Initation Script (v2.1.2)",
+   Icon = 0, -- Icon in Topbar. Can use Lucide Icons (string) or Roblox Image (number). 0 to use no icon (default).
+   LoadingTitle = "Combat Initiation(Beta)",
+   LoadingSubtitle = "by NormalNoobOff:D",
+   Theme = "Default", -- Check https://docs.sirius.menu/rayfield/configuration/themes
 
    DisableRayfieldPrompts = false,
-   DisableBuildWarnings = false, 
+   DisableBuildWarnings = false, -- Prevents Rayfield from warning when the script has a version mismatch with the interface
+
    ConfigurationSaving = {
-      Enabled = True,
-      FolderName = SigmaInitiation
-      FileName = "sigmasavefile"
+      Enabled = true,
+      FolderName = Script Initiation, -- Create a custom folder for your hub/game
+      FileName = "Configs"
    },
 
    Discord = {
-      Enabled = false,
-      Invite = "noinvitelink",
-      RememberJoins = true 
+      Enabled = false, -- Prompt the user to join your Discord server if their executor supports it
+      Invite = "noinvitelink", -- The Discord invite code, do not include discord.gg/. E.g. discord.gg/ ABCD would be ABCD
+      RememberJoins = true -- Set this to false to make them join the discord every time they load it up
    },
 
-   KeySystem = true,
+   KeySystem = true, -- Set this to true to use our key system
    KeySettings = {
-      Title = "Sigma Initiation Script",
-      Subtitle = "Epickey System",
-      Note = "tysm for using the script",
-      FileName = "sigmakey",
-      SaveKey = true,
-      GrabKeyFromSite = false,
-      Key = "tysmforusingthescript"
+      Title = "Key System",
+      Subtitle = "For my script lulz:D",
+      Note = "https://pastebin.com/pm17Y7Ef", -- Use this to tell the user how to get a key
+      FileName = "fart_key_system", -- It is recommended to use something unique as other scripts using Rayfield may overwrite your key file
+      SaveKey = true, -- The user's key will be saved, but if you change the key, they will be unable to use your script
+      GrabKeyFromSite = false, -- If this is true, set Key below to the RAW site you would like Rayfield to get the key from
+      Key = {"tysmforusingthisscript"} -- List of keys that will be accepted by the system, can be RAW file links (pastebin, github etc) or simple strings ("hello","key22")
    }
 })
+
+-- Function to modify tool attributes safely (check both Backpack and equipped tools)
 local function modifyToolAttributes(toolName, attributes)
     local player = game.Players.LocalPlayer
     local tool = player.Backpack:FindFirstChild(toolName) or player.Character:FindFirstChild(toolName)
@@ -45,13 +48,14 @@ local function modifyToolAttributes(toolName, attributes)
     end
 end
 
-local Tab = Window:CreateTab("Mod World", 0)
+local Tab = Window:CreateTab("Modded World", 0)
 
 local Section1 = Tab:CreateSection("Sword")
-Tab:CreateParagraph({Title = "Sword", Content = "autoparry by holding"})
+Tab:CreateParagraph({Title = "Sword", Content = "ok go play PARRY!"})
 
+-- Button for Modded Sword
 Tab:CreateButton({
-	Name = "Spammable Sword",
+	Name = "Modded Sword",
 	Callback = function(Value)
 		modifyToolAttributes("Sword", {
 			LungeRate = 0,
@@ -63,7 +67,7 @@ Tab:CreateButton({
 
 -- Button for Modded Firebrand
 Tab:CreateButton({
-	Name = "Fastest Firebrand",
+	Name = "Modded Firebrand",
 	Callback = function()
 		modifyToolAttributes("Firebrand", {
 			LungeRate = 0,
@@ -76,7 +80,7 @@ Tab:CreateButton({
 
 -- Button for Modded Katana
 Tab:CreateButton({
-	Name = "Katana Flashswing",
+	Name = "Modded Katana",
 	Callback = function()
 		modifyToolAttributes("Katana", {
 		    LungeRate = 0,
@@ -87,11 +91,11 @@ Tab:CreateButton({
 })
 
 local Section2 = Tab:CreateSection("Slingshot")
-Tab:CreateParagraph({Title = "Slingshot", Content = "Laggable thing"})
+Tab:CreateParagraph({Title = "Slingshot", Content = "Flash Shoots and Instant Refresh!"})
 
 -- Button for Modded Slingshot
 Tab:CreateButton({
-	Name = "Flash Slingshot",
+	Name = "Modded Slingshot",
 	Callback = function()
 		modifyToolAttributes("Slingshot", {
 			Capacity = 10000,
@@ -105,7 +109,7 @@ Tab:CreateButton({
 
 -- Button for Modded Flamethrower
 Tab:CreateButton({
-	Name = "Autocharge Flamethower",
+	Name = "Modded Flamethrower",
 	Callback = function()
 		modifyToolAttributes("Flamethrower", {
 		    Cooldown = 0
@@ -114,11 +118,11 @@ Tab:CreateButton({
 })
 
 local Section3 = Tab:CreateSection("Paintball Gun")
-Tab:CreateParagraph({Title = "Paintball Gun", Content = "From a sniper turned into an AK type of gun"})
+Tab:CreateParagraph({Title = "Paintball Gun", Content = "Turn into a rifle quick!"})
 
 -- Button for Modded Paintball Gun
 Tab:CreateButton({
-	Name = "Brick Rain Maker(Normal Paintball Gun)",
+	Name = "Modded Paintball Gun",
 	Callback = function()
 		modifyToolAttributes("Paintball Gun", {
 		    Firerate = 0,
@@ -129,7 +133,7 @@ Tab:CreateButton({
 
 -- Button for Modded BB Gun
 Tab:CreateButton({
-	Name = "Big Boi Gun",
+	Name = "Modded BB Gun",
 	Callback = function()
 		modifyToolAttributes("BB Gun", {
 		    Firerate = 0,
@@ -141,7 +145,7 @@ Tab:CreateButton({
 
 -- Button for Modded Freeze Ray
 Tab:CreateButton({
-	Name = "Mega Mega Hollow Blue(Always)",
+	Name = "Modded Freeze Ray",
 	Callback = function()
 		modifyToolAttributes("Freeze Ray", {
 		    Firerate = 0,
@@ -150,18 +154,9 @@ Tab:CreateButton({
 		})
 	end
 })
-Tab:CreateButton({
-	Name = "Mega Mega Hollow Blue(Hold 2 Charge)",
-	Callback = function()
-		modifyToolAttributes("Freeze Ray", {
-		    Firerate = 0,
-		    ProjectileSpeed = 2250,
-		})
-	end
-})
 
 local Section4 = Tab:CreateSection("Superball")
-Tab:CreateParagraph({Title = "Superball", Content = "Baller!"})
+Tab:CreateParagraph({Title = "Superball", Content = "Rizz with ball:)"})
 
 -- Button for Modded Ninja Stars
 Tab:CreateButton({
@@ -175,55 +170,85 @@ Tab:CreateButton({
 	end
 })
 
--- Button for Modded Superball
+local Section5 = Tab:CreateSection("Timebomb")
+Tab:CreateParagraph({Title = "Timebomb", Content = "Broken thing don't use this"})
+
+-- Button for Modded Explosive Pinata
 Tab:CreateButton({
-	Name = "Modded Superball(huh)",
-	Flag = "Superball",
-	Callback = function()
-		modifyToolAttributes("Superball", {
-			Cooldown = 0,
-		})
+	Name = "Modded Explosive Pinata",
+	Callback = function(Value)
+		    modifyToolAttributes("Explosive Pinata", {
+			    Cooldown = 0
+		    })
 	end
 })
 
-local Section4 = Tab:CreateSection("Rocket Launcher") 
-Tab:CreateParagraph({Title = "Rocket Launcher", Content = "He got 5 big boom:BOOM,BOOOM,BOOOOM,BOOOOOOM,BOOOOOOOOOM"})
+local Section6 = Tab:CreateSection("Trowel")
+Tab:CreateParagraph({Title = "Trowel", Content = "Sentries or buildings?"})
 
--- Button for Modded Rocket Launcher
-Tab:CreateButton({
-	Name = "Normal Boomer",
-  Flag = "Rocket Launcher"
-  Callback = function()
-    modifyToolAttributes("Rocket Launcher", {
-    Cooldown = 0,
-    })
-  end
-})
-
--- Button for Modded Bazooka
-Tab:CreateButton({
-	Name = "Modded Bazooka",
-        Default = false,
-	Flag = "Bazooka",
-	Callback = function()
-		modifyToolAttributes("Bazooka", {
-			Cooldown = 0,
-      ReloadTick = 0,
-			Capacity = 100,
-			PassiveReloadTick = 0
-		})
+-- Toggle for Frozen Wrench
+Tab:CreateToggle({
+	Name = "Frozen Wrench",
+	Flag = "Wrench",
+	Callback = function(Value)
+		local tool = game.Players.LocalPlayer.Backpack:FindFirstChild("Wrench") or game.Players.LocalPlayer.Character:FindFirstChild("Wrench")
+		if tool then
+			tool:SetAttribute("TimeScale", Value and 0 or 1)
+		else
+			print("Wrench not found in the Backpack or equipped.")
+		end
 	end
 })
 
---Button for Modded Multi-Rocket Launcher
-Tab:CreateButton({
-   Name = "Skibidi Sprinkler"
-   Flag = "Multi-Rocket Launcher"
+-- Hats Tab
+local Tab2 = Window:CreateTab("Hats(Sometime Bugged)", 0)
+
+-- Button for Electric Punk
+Tab2:CreateButton({
+	Name = "Electric Punk (Lighting Chance)",
 	Callback = function()
-		modifyToolAttributes("Multi-Rocket Launcher", {
-      Cooldown = 0,
-    })
-  end
+		local accessoryEffects = game.Players.LocalPlayer.Backpack.Parent:FindFirstChild("AccessoryEffects")
+		if accessoryEffects then
+			accessoryEffects:SetAttribute("Lightning_Chance", 100)
+		else
+			print("AccessoryEffects not found.")
+		end
+	end
+})
+
+Tab2:CreateInput({
+	Name = "Melee Range Editor(5 = +500%)",
+	CurrentValue = "5",
+	RemoveTextAfterFocusLost = false,
+	PlaceholderText = "",
+	Flag = "meleerangevalue",
+	Callback = function(Value)
+		Rayfield.Flags["meleerangevalue"] = { Value = Value }
+	end	  
+})
+
+Tab2:CreateInput({
+	Name = "Pogo Range Editor(5 = +500%)",
+	Default = "5",
+	RemoveTextAfterFocusLost = false,
+	PlaceholderText = "",
+	Flag = "pogorangevalue",
+	Callback = function(Value)
+		Rayfield.Flags["pogorangevalue"] = { Value = Value }
+	end	  
+})
+
+Tab2:CreateButton({
+	Name = "Bandit/Stage Prop (Melee Range & Pogo Range)",
+	Callback = function()
+		local accessoryEffects = game.Players.LocalPlayer.Backpack.Parent:FindFirstChild("AccessoryEffects")
+		if accessoryEffects then
+			accessoryEffects:SetAttribute("Melee_Range", Rayfield.Flags["meleerangevalue"].Value)
+			accessoryEffects:SetAttribute("Pogo_Range", Rayfield.Flags["pogorangevalue"].Value)
+		else
+			print("AccessoryEffects not found.")
+		end
+	end
 })
 
 -- Character Tab
@@ -237,7 +262,7 @@ Tab3:CreateButton({
 		if character then
 			character:SetAttribute("DashRegenTime", 0.05)
 		else
-			print("loser")
+			print("Character not found.")
 		end
 	end
 })
