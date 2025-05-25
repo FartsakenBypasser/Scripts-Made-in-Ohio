@@ -24,11 +24,11 @@
    KeySettings = {
       Title = "Sigma Initiation Script",
       Subtitle = "Epickey System",
-      Note = "pls help me pay bill doin this",
+      Note = "tysm for using the script",
       FileName = "sigmakey",
       SaveKey = true,
-      GrabKeyFromSite = true,
-      Key = {"https://pastebin.com/raw/pm17Y7Ef"}
+      GrabKeyFromSite = false,
+      Key = "tysmforusingthescript"
    }
 })
 local function modifyToolAttributes(toolName, attributes)
@@ -203,6 +203,7 @@ Tab:CreateButton({
 -- Button for Modded Bazooka
 Tab:CreateButton({
 	Name = "Modded Bazooka",
+        Default = false,
 	Flag = "Bazooka",
 	Callback = function()
 		modifyToolAttributes("Bazooka", {
@@ -236,7 +237,7 @@ Tab3:CreateButton({
 		if character then
 			character:SetAttribute("DashRegenTime", 0.05)
 		else
-			print("Character not found.")
+			print("loser")
 		end
 	end
 })
