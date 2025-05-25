@@ -1,18 +1,18 @@
 local Rayfield = loadstring(game:HttpGet('https://sirius.menu/rayfield'))()
 local Window = Rayfield:CreateWindow({
-   Name = "Combat Initation Script (v1.0.4)",
+   Name = "Combat Initation Script (v1.0.5)",
    Icon = 0, -- Icon in Topbar. Can use Lucide Icons (string) or Roblox Image (number). 0 to use no icon (default).
-   LoadingTitle = "Combat Initiation(Beta)",
-   LoadingSubtitle = "by NormalNoobOff:D",
+   LoadingTitle = "Combat Initiation",
+   LoadingSubtitle = "by NormalNoobOff",
    Theme = "Default", -- Check https://docs.sirius.menu/rayfield/configuration/themes
 
    DisableRayfieldPrompts = false,
    DisableBuildWarnings = false, -- Prevents Rayfield from warning when the script has a version mismatch with the interface
 
    ConfigurationSaving = {
-      Enabled = true,
-      FolderName = Script Initiation, -- Create a custom folder for your hub/game
-      FileName = "Configs"
+      Enabled = false,
+      FolderName = nil, -- Create a custom folder for your hub/game
+      FileName = "Big Hub"
    },
 
    Discord = {
@@ -23,13 +23,13 @@ local Window = Rayfield:CreateWindow({
 
    KeySystem = false, -- Set this to true to use our key system
    KeySettings = {
-      Title = "None",
-      Subtitle = "None",
-      Note = "None", -- Use this to tell the user how to get a key
-      FileName = "None", -- It is recommended to use something unique as other scripts using Rayfield may overwrite your key file
-      SaveKey = false, -- The user's key will be saved, but if you change the key, they will be unable to use your script
+      Title = "Untitled",
+      Subtitle = "Key System",
+      Note = "No method of obtaining the key is provided", -- Use this to tell the user how to get a key
+      FileName = "Key", -- It is recommended to use something unique as other scripts using Rayfield may overwrite your key file
+      SaveKey = true, -- The user's key will be saved, but if you change the key, they will be unable to use your script
       GrabKeyFromSite = false, -- If this is true, set Key below to the RAW site you would like Rayfield to get the key from
-      Key = {"None"} -- List of keys that will be accepted by the system, can be RAW file links (pastebin, github etc) or simple strings ("hello","key22")
+      Key = {"Hello"} -- List of keys that will be accepted by the system, can be RAW file links (pastebin, github etc) or simple strings ("hello","key22")
    }
 })
 
@@ -51,7 +51,7 @@ end
 local Tab = Window:CreateTab("Modded World", 0)
 
 local Section1 = Tab:CreateSection("Sword")
-Tab:CreateParagraph({Title = "Sword", Content = "ok go play PARRY!"})
+Tab:CreateParagraph({Title = "Sword", Content = "Speedy Parrier"})
 
 -- Button for Modded Sword
 Tab:CreateButton({
@@ -91,7 +91,7 @@ Tab:CreateButton({
 })
 
 local Section2 = Tab:CreateSection("Slingshot")
-Tab:CreateParagraph({Title = "Slingshot", Content = "Flash Shoots and Instant Refresh!"})
+Tab:CreateParagraph({Title = "Slingshot", Content = "Flash Shoots"})
 
 -- Button for Modded Slingshot
 Tab:CreateButton({
@@ -118,7 +118,7 @@ Tab:CreateButton({
 })
 
 local Section3 = Tab:CreateSection("Paintball Gun")
-Tab:CreateParagraph({Title = "Paintball Gun", Content = "Turn into a rifle quick!"})
+Tab:CreateParagraph({Title = "Paintball Gun", Content = "Real rifle"})
 
 -- Button for Modded Paintball Gun
 Tab:CreateButton({
@@ -145,7 +145,7 @@ Tab:CreateButton({
 
 -- Button for Modded Freeze Ray
 Tab:CreateButton({
-	Name = "Modded Freeze Ray",
+	Name = "Modded Freeze Ray (Always Charged)",
 	Callback = function()
 		modifyToolAttributes("Freeze Ray", {
 		    Firerate = 0,
@@ -156,7 +156,7 @@ Tab:CreateButton({
 })
 
 local Section4 = Tab:CreateSection("Superball")
-Tab:CreateParagraph({Title = "Superball", Content = "Rizz with ball:)"})
+Tab:CreateParagraph({Title = "Superball", Content = "Baller!:D"})
 
 -- Button for Modded Ninja Stars
 Tab:CreateButton({
@@ -171,7 +171,19 @@ Tab:CreateButton({
 })
 
 local Section5 = Tab:CreateSection("Timebomb")
-Tab:CreateParagraph({Title = "Timebomb", Content = "Broken thing don't use this"})
+Tab:CreateParagraph({Title = "Timebomb", Content = "!bugged!"})
+
+-- Button for Modded Subspace Tripmine
+Tab:CreateButton({
+	Name = "Modded Subspace Tripmine",
+	Default = false,
+	Flag = "Subspace_Tripmine",
+	Callback = function()
+		modifyToolAttributes("Subspace Tripmine", {
+		    Cooldown = 0
+		})
+	end
+})
 
 -- Button for Modded Explosive Pinata
 Tab:CreateButton({
@@ -184,7 +196,7 @@ Tab:CreateButton({
 })
 
 local Section6 = Tab:CreateSection("Trowel")
-Tab:CreateParagraph({Title = "Trowel", Content = "Sentries or buildings?"})
+Tab:CreateParagraph({Title = "Trowel", Content = "Sentry Dispenser Here:D"})
 
 -- Toggle for Frozen Wrench
 Tab:CreateToggle({
@@ -201,7 +213,7 @@ Tab:CreateToggle({
 })
 
 -- Hats Tab
-local Tab2 = Window:CreateTab("Hats(Sometime Bugged)", 0)
+local Tab2 = Window:CreateTab("Hats", 0)
 
 -- Button for Electric Punk
 Tab2:CreateButton({
@@ -217,7 +229,7 @@ Tab2:CreateButton({
 })
 
 Tab2:CreateInput({
-	Name = "Melee Range Editor(5 = +500%)",
+	Name = "Melee Range (5 = +500%)",
 	CurrentValue = "5",
 	RemoveTextAfterFocusLost = false,
 	PlaceholderText = "",
@@ -228,7 +240,7 @@ Tab2:CreateInput({
 })
 
 Tab2:CreateInput({
-	Name = "Pogo Range Editor(5 = +500%)",
+	Name = "Pogo Range (5 = +500%)",
 	Default = "5",
 	RemoveTextAfterFocusLost = false,
 	PlaceholderText = "",
@@ -261,6 +273,30 @@ Tab3:CreateButton({
 		local character = game.Players.LocalPlayer.Character
 		if character then
 			character:SetAttribute("DashRegenTime", 0.05)
+		else
+			print("Character not found.")
+		end
+	end
+})
+
+-- Utility Boost Textbox and Button
+Tab3:CreateInput({
+	Name = "Utility Boost Value",
+	CurrentValue = "2",
+	RemoveTextAfterFocusLost = false,
+	PlaceholderText = "",
+	Flag = "utilityboostvalue",
+	Callback = function(Value)
+		Rayfield.Flags["utilityboostvalue"] = { Value = Value }
+	end
+})
+
+Tab3:CreateButton({
+	Name = "Utility Boost",
+	Callback = function()
+		local character = game.Players.LocalPlayer.Character
+		if character then
+			character:SetAttribute("UtilityBoost", Rayfield.Flags["utilityboostvalue"].Value)
 		else
 			print("Character not found.")
 		end
