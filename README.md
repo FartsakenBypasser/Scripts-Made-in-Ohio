@@ -1,1 +1,12 @@
-Welcome to my script zone :D
+# Welcome to my script zone :D
+<br/>
+**Combat Initation (updated for v1.0.4)**
+```lua
+loadstring(game:HttpGet('https://raw.githubusercontent.com/FartsakenBypasser/BypassedScriptZone/main/Combat%20Initiation%20EZ'))()
+```
+### Thanks to Rayfield for the UI!
+---
+**Fartsaken but Keyless (Discontinued)**
+```lua
+loadstring(game:HttpGet('https://raw.githubusercontent.com/FartsakenBypasser/BypassedScriptZone/main/Keylessaken(Verified)'))()
+```
