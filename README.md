@@ -3,4 +3,9 @@
 ```lua
 loadstring(game:HttpGet('https://raw.githubusercontent.com/FartsakenBypasser/Scripts-Made-In-Ohio/main/combatinitiation.luau'))()
 ```
+
+```lua
+loadstring(game:HttpGet('https://raw.githubusercontent.com/FartsakenBypasser/Scripts-Made-In-Ohio/main/fartyforsaken.luau'))()
+```
+
 # FE2 Script coming soon!!!
