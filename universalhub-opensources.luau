@@ -1,6 +1,6 @@
 local Rayfield = loadstring(game:HttpGet('https://sirius.menu/rayfield'))()
 local Window = Rayfield:CreateWindow({
-   Name = "CI's Universal Script",
+   Name = "Noob Hub's Universal Script",
    Icon = 0, -- Icon in Topbar. Can use Lucide Icons (string) or Roblox Image (number). 0 to use no icon (default).
    LoadingTitle = "When you are loading this hub in unsupported games:)",
    LoadingSubtitle = "by NormalNoobOff",
@@ -33,7 +33,7 @@ local Window = Rayfield:CreateWindow({
    }
 })
 
-local Tab = Window:CreateTab("Movement", 0)
+local Tab = Window:CreateTab("Movement", microwave)
 
 Tab:CreateInput({
     Name = "Fly Speed",
@@ -390,6 +390,89 @@ Tab:CreateToggle({
             getgenv().AntiAFKConnection = RunService.Heartbeat:Connect(function()
                 Players.LocalPlayer.Idled:Fire()
             end)
+        end
+    end
+})
+
+Tab:CreateToggle({
+    Name = "Click to TP",
+    CurrentValue = false,
+    Flag = "ClickToTPToggle",
+    Callback = function(Value)
+        local UserInputService = game:GetService("UserInputService")
+        local lp = game.Players.LocalPlayer
+        local camera = workspace.CurrentCamera
+
+        if getgenv().ClickToTPConnection then
+            getgenv().ClickToTPConnection:Disconnect()
+            getgenv().ClickToTPConnection = nil
+        end
+
+        if Value then
+            getgenv().ClickToTPConnection = UserInputService.InputBegan:Connect(function(input, processed)
+                if processed then return end
+                if input.UserInputType == Enum.UserInputType.MouseButton1 then
+                    local mouseLocation = UserInputService:GetMouseLocation()
+                    local viewportPointRay = camera:ViewportPointToRay(mouseLocation.X, mouseLocation.Y)
+                    local raycastParams = RaycastParams.new()
+                    raycastParams.FilterDescendantsInstances = {lp.Character}
+                    raycastParams.FilterType = Enum.RaycastFilterType.Blacklist
+                    local raycastResult = workspace:Raycast(viewportPointRay.Origin, viewportPointRay.Direction * 1000, raycastParams)
+                    if raycastResult then
+                        local character = lp.Character or lp.CharacterAdded:Wait()
+                        local hrp = character:FindFirstChild("HumanoidRootPart")
+                        if hrp then
+                            hrp.CFrame = CFrame.new(raycastResult.Position + Vector3.new(0, 3, 0))
+                        end
+                    end
+                end
+            end)
+        end
+    end
+})
+
+Tab:CreateToggle({
+    Name = "Anti-Cheat Cleaner",
+    CurrentValue = false,
+    Flag = "AntiCheatCleanerToggle",
+    Callback = function(Value)
+        local RunService = game:GetService("RunService")
+        local lp = game.Players.LocalPlayer
+
+        if getgenv().AntiCheatCleanerConnection then
+            getgenv().AntiCheatCleanerConnection:Disconnect()
+            getgenv().AntiCheatCleanerConnection = nil
+        end
+
+        local function isSafeScript(scr)
+            -- Don't remove scripts in your own PlayerScripts, Backpack, or UI
+            if scr:IsDescendantOf(lp.PlayerScripts) then return true end
+            if scr:IsDescendantOf(lp.Backpack) then return true end
+            if scr:IsDescendantOf(lp.PlayerGui) then return true end
+            return false
+        end
+
+        local function cleanScripts()
+            for _, obj in ipairs(game:GetDescendants()) do
+                if (obj:IsA("LocalScript") or obj:IsA("Script")) and not isSafeScript(obj) then
+                    pcall(function()
+                        obj:Destroy()
+                    end)
+                end
+            end
+        end
+
+        if Value then
+            -- Clean immediately and then every 2 seconds
+            cleanScripts()
+            getgenv().AntiCheatCleanerConnection = RunService.Stepped:Connect(function(step, dt)
+                cleanScripts()
+            end)
+        else
+            if getgenv().AntiCheatCleanerConnection then
+                getgenv().AntiCheatCleanerConnection:Disconnect()
+                getgenv().AntiCheatCleanerConnection = nil
+            end
         end
     end
 })
