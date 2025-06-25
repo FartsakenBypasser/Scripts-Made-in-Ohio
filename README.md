@@ -1,5 +1,5 @@
 # Welcome to my script zone :D
-**Combat Initation (updated for v1.1.2)**
+**Combat Initation (updated for v1.1.4)**
 ```lua
 loadstring(game:HttpGet('https://raw.githubusercontent.com/FartsakenBypasser/Scripts-Made-In-Ohio/main/combatinitiation.luau'))()
 ```
