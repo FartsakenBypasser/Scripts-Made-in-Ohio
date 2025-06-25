@@ -3,7 +3,7 @@
 ```lua
 loadstring(game:HttpGet('https://raw.githubusercontent.com/FartsakenBypasser/Scripts-Made-In-Ohio/main/combatinitiation.luau'))()
 ```
-**Fartsaken Reborn:Noob Hub(v1.0.2)**
+**Fartsaken Reborn:Noob Hub(v1.0.3)**
 ```lua
 loadstring(game:HttpGet('https://raw.githubusercontent.com/FartsakenBypasser/Scripts-Made-In-Ohio/main/fartforsaken.luau'))()
 ```
