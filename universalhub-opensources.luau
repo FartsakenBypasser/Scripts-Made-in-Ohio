@@ -54,44 +54,37 @@ Tab:CreateToggle({
         local RunService = game:GetService("RunService")
         local UserInputService = game:GetService("UserInputService")
         local lp = game.Players.LocalPlayer
-        local character = lp.Character or lp.CharacterAdded:Wait()
-        local hrp = character:FindFirstChild("HumanoidRootPart")
-        local humanoid = character:FindFirstChildOfClass("Humanoid")
-        local flySpeed = tonumber(Rayfield.Flags["flyspeedvalue"] and Rayfield.Flags["flyspeedvalue"].Value) or 50
 
         if getgenv().FlyConnection then
             getgenv().FlyConnection:Disconnect()
             getgenv().FlyConnection = nil
         end
 
-        if humanoid then humanoid.PlatformStand = false end
-
         if Value then
-            local flying = true
-            local direction = Vector3.new()
             getgenv().FlyConnection = RunService.RenderStepped:Connect(function()
-                if not lp.Character or not lp.Character:FindFirstChild("HumanoidRootPart") then return end
-                hrp = lp.Character:FindFirstChild("HumanoidRootPart")
-                humanoid = lp.Character:FindFirstChildOfClass("Humanoid")
-                if humanoid then humanoid.PlatformStand = true end
+                local character = lp.Character
+                local hrp = character and character:FindFirstChild("HumanoidRootPart")
+                local flySpeed = tonumber(Rayfield.Flags["flyspeedvalue"] and Rayfield.Flags["flyspeedvalue"].Value) or 50
+                if hrp then
+                    local direction = Vector3.new()
+                    if UserInputService:IsKeyDown(Enum.KeyCode.W) then direction = direction + workspace.CurrentCamera.CFrame.LookVector end
+                    if UserInputService:IsKeyDown(Enum.KeyCode.S) then direction = direction - workspace.CurrentCamera.CFrame.LookVector end
+                    if UserInputService:IsKeyDown(Enum.KeyCode.A) then direction = direction - workspace.CurrentCamera.CFrame.RightVector end
+                    if UserInputService:IsKeyDown(Enum.KeyCode.D) then direction = direction + workspace.CurrentCamera.CFrame.RightVector end
+                    if UserInputService:IsKeyDown(Enum.KeyCode.Space) then direction = direction + Vector3.new(0,1,0) end
+                    if UserInputService:IsKeyDown(Enum.KeyCode.LeftControl) then direction = direction - Vector3.new(0,1,0) end
 
-                direction = Vector3.new()
-                if UserInputService:IsKeyDown(Enum.KeyCode.W) then direction = direction + workspace.CurrentCamera.CFrame.LookVector end
-                if UserInputService:IsKeyDown(Enum.KeyCode.S) then direction = direction - workspace.CurrentCamera.CFrame.LookVector end
-                if UserInputService:IsKeyDown(Enum.KeyCode.A) then direction = direction - workspace.CurrentCamera.CFrame.RightVector end
-                if UserInputService:IsKeyDown(Enum.KeyCode.D) then direction = direction + workspace.CurrentCamera.CFrame.RightVector end
-                if UserInputService:IsKeyDown(Enum.KeyCode.Space) then direction = direction + Vector3.new(0,1,0) end
-                if UserInputService:IsKeyDown(Enum.KeyCode.LeftControl) then direction = direction - Vector3.new(0,1,0) end
-
-                if direction.Magnitude > 0 then
-                    hrp.Velocity = direction.Unit * flySpeed
-                else
-                    hrp.Velocity = Vector3.new(0,0,0)
+                    if direction.Magnitude > 0 then
+                        hrp.AssemblyLinearVelocity = direction.Unit * flySpeed
+                    else
+                        hrp.AssemblyLinearVelocity = Vector3.new(0,0,0)
+                    end
                 end
             end)
         else
-            if humanoid then humanoid.PlatformStand = false end
-            if hrp then hrp.Velocity = Vector3.new(0,0,0) end
+            local character = lp.Character
+            local hrp = character and character:FindFirstChild("HumanoidRootPart")
+            if hrp then hrp.AssemblyLinearVelocity = Vector3.new(0,0,0) end
             if getgenv().FlyConnection then
                 getgenv().FlyConnection:Disconnect()
                 getgenv().FlyConnection = nil
@@ -316,8 +309,6 @@ Tab:CreateToggle({
     Callback = function(Value)
         local RunService = game:GetService("RunService")
         local lp = game.Players.LocalPlayer
-        local character = lp.Character or lp.CharacterAdded:Wait()
-        local humanoidRootPart = character:FindFirstChild("HumanoidRootPart")
 
         if getgenv().NoClipConnection then
             getgenv().NoClipConnection:Disconnect()
@@ -326,13 +317,23 @@ Tab:CreateToggle({
 
         if Value then
             getgenv().NoClipConnection = RunService.Stepped:Connect(function()
-                if humanoidRootPart then
-                    humanoidRootPart.CanCollide = false
+                local character = lp.Character
+                if character then
+                    for _, part in ipairs(character:GetDescendants()) do
+                        if part:IsA("BasePart") and part.CanCollide then
+                            part.CanCollide = false
+                        end
+                    end
                 end
             end)
         else
-            if humanoidRootPart then
-                humanoidRootPart.CanCollide = true
+            local character = lp.Character
+            if character then
+                for _, part in ipairs(character:GetDescendants()) do
+                    if part:IsA("BasePart") then
+                        part.CanCollide = true
+                    end
+                end
             end
             if getgenv().NoClipConnection then
                 getgenv().NoClipConnection:Disconnect()
